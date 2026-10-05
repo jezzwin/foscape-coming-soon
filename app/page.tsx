@@ -1,69 +1,71 @@
 import Image from "next/image";
-import styles from "./page.module.css";
+import { FoscapeLogo } from "@/components/FoscapeLogo";
+import { PondBackground } from "@/components/PondBackground";
+import { siteConfig } from "@/lib/site";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteConfig.url}/#organization`,
+      name: siteConfig.name,
+      url: siteConfig.url,
+      slogan: siteConfig.tagline,
+      description: siteConfig.description,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteConfig.url}/foscape-logo.svg`,
+      },
+      parentOrganization: { "@type": "Organization", name: "Aqua55" },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteConfig.url}/#website`,
+      url: siteConfig.url,
+      name: siteConfig.name,
+      description: siteConfig.description,
+      inLanguage: "en",
+      publisher: { "@id": `${siteConfig.url}/#organization` },
+    },
+  ],
+};
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+    <>
+      <PondBackground />
+      <div className="overlay overlay--scrim" />
+      <div className="overlay overlay--vignette" />
+      <div className="overlay overlay--grain" />
+
+      <main className="stage">
+        <div className="lockup">
+          <div className="brand">
+            <FoscapeLogo className="logo" />
+            <span className="brand__divider" aria-hidden="true" />
             <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+              className="brand__aqua"
+              src="/aqua55-mark.png"
+              alt="The Aqua55"
+              width={416}
+              height={288}
+              priority
+              sizes="(max-width: 820px) 128px, 176px"
             />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </div>
+          <h1 className="coming">
+            <span className="sr-only">Foscape — </span>Coming Soon
+          </h1>
+          <p className="domain">{siteConfig.domain}</p>
+          <p className="tagline">{siteConfig.tagline}</p>
         </div>
       </main>
-    </div>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+    </>
   );
 }
