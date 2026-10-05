@@ -38,5 +38,5 @@ export type BackgroundMode = "video" | "image";
  * Source-level only — there is no public UI for this.
  */
 export const backgroundConfig = {
-  mode: "video" as BackgroundMode,
+  mode: "image" as BackgroundMode,
 };
