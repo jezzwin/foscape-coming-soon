@@ -28,6 +28,7 @@ export const siteConfig = {
   ],
   locale: "en_US",
   themeColor: "#021523",
+  instagram: "https://www.instagram.com/foscape_stories",
 } as const;
 
 export type BackgroundMode = "video" | "image";
